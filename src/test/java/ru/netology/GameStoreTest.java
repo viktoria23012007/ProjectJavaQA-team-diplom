@@ -54,16 +54,8 @@ public class GameStoreTest {
         boolean actual = store.containsGame(game1);
 
         assertEquals(expected, actual);
-    }
+    }*/
 
-    @Test //  выдать сообщение о том, что данной игры нет в каталоге
-    public void shouldMessageIfNotFindGame() {
-        Game game1 = new Game("А", "Стратегия", this.store);
-
-        assertThrows(NotFoundException.class, () -> {
-            store.containsGame(game1);
-        });
-    }
 
     @Test //  выдать сообщение при создании игры, что данная игра уже есть в каталоге
     public void shouldMessageIfGameAlreadyExists() {
@@ -72,7 +64,7 @@ public class GameStoreTest {
         assertThrows(AlreadyExistsException.class, () -> {
             store.publishGame("А", "Стратегия");
         });
-    }
+    }*/
 
     @Test // покажи каталог, к которому принадлежит добаленная игра
     public void shouldShowCurrentStore() {
@@ -334,6 +326,17 @@ public class GameStoreTest {
         store.addPlayTime(player1.getName(), 1);
 
         Integer expected = 6;
+        Integer actual = (store.getPlayedTime()).get(player1.getName());
+
+        assertEquals(expected, actual);
+    }
+
+    @Test  // указать отрицательное число в параметре времени
+    public void shouldNotAddIfTimeNegative() {
+        Player player1 = new Player("Петя");
+        store.addPlayTime(player1.getName(), -1);
+
+        Integer expected = 0;
         Integer actual = (store.getPlayedTime()).get(player1.getName());
 
         assertEquals(expected, actual);
