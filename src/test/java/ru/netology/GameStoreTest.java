@@ -54,8 +54,7 @@ public class GameStoreTest {
         boolean actual = store.containsGame(game1);
 
         assertEquals(expected, actual);
-    }*/
-
+    }
 
     @Test //  выдать сообщение при создании игры, что данная игра уже есть в каталоге
     public void shouldMessageIfGameAlreadyExists() {
@@ -64,7 +63,7 @@ public class GameStoreTest {
         assertThrows(AlreadyExistsException.class, () -> {
             store.publishGame("А", "Стратегия");
         });
-    }*/
+    }
 
     @Test // покажи каталог, к которому принадлежит добаленная игра
     public void shouldShowCurrentStore() {
@@ -314,7 +313,7 @@ public class GameStoreTest {
         });
     }
 
-    @Test  // добавить время игрока, если ранее играл в несколько игр каталога
+    @Test  // добавить время игрока, если ранее играл в игры каталога
     public void shouldAddTimePlayerIfPlayedSeveralGames() {
         Game game1 = store.publishGame("А", "Стратегия");
         Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
@@ -341,7 +340,4 @@ public class GameStoreTest {
 
         assertEquals(expected, actual);
     }
-
-
-
 }
