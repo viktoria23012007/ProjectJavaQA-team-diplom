@@ -30,7 +30,7 @@ public class PlayerTest {
 
         Player player = new Player("Petya");
 
-        assertThrows(RuntimeException.class, () -> {
+        assertThrows(GameNotInstalled.class, () -> {
             player.play(game3, 1);
         });
     }
