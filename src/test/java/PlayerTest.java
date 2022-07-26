@@ -3,12 +3,14 @@ package ru.netology;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.NullString;
+
+import java.util.Objects;
 
 public class PlayerTest {
 
     @Test
     public void shouldSumGenreIfOneGame() {
-
         GameStore store = new GameStore();
         Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
 
@@ -21,109 +23,125 @@ public class PlayerTest {
         assertEquals(expected, actual);
     }
 
-
     @Test
-    public void shouldExpIfGameNotInstall() {
-
+    public void checkMostPlayedGenre() {
         GameStore store = new GameStore();
-        Game game3 = store.publishGame("Симс", "Бродилка");
+        Game arcade = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+        Game arcade2 = store.publishGame("Нетология Баттл Онлайн 2", "Аркады");
+        Game shooter = store.publishGame("Нетология Баттл Онлайн", "Шутер");
 
         Player player = new Player("Petya");
+        player.installGame(arcade);
+        player.installGame(arcade2);
+        player.installGame(shooter);
 
-        assertThrows(RuntimeException.class, () -> {
-            player.play(game3, 1);
+        player.play(arcade, 4);
+        player.play(arcade2, 3);
+        player.play(shooter, 2);
+
+        String expected = "Нетология Баттл Онлайн";
+        String actual = player.mostPlayerByGenre("Аркады");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void checkSumCounter() {
+        GameStore store = new GameStore();
+        Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+
+        Player player = new Player("Petya");
+        player.installGame(game);
+        player.play(game, 3);
+
+        int expected = 5;
+        int actual = player.play(game, 2);
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
+    public void MostPlayedGenre() {
+        GameStore store = new GameStore();
+        Game arcade = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+        Game arcade2 = store.publishGame("Нетология Баттл Онлайн 2", "Аркады");
+        Game shooter = store.publishGame("Нетология Баттл Онлайн", "Шутер");
+
+        Player player = new Player("Petya");
+        player.installGame(arcade);
+        player.installGame(arcade2);
+        player.installGame(shooter);
+
+        player.play(arcade, 5);
+        player.play(arcade2, 3);
+        player.play(shooter, 3);
+
+        String expected = "Нетология Баттл Онлайн";
+        String actual = player.mostPlayerByGenre("Аркады");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSumGenreGame() {
+        GameStore store = new GameStore();
+        Game arcade = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+        Game arcade2 = store.publishGame("Нетология Баттл Онлайн 2", "Аркады");
+        Game shooter = store.publishGame("Нетология Баттл Онлайн", "Шутер");
+
+        Player player = new Player("Petya");
+        player.installGame(arcade);
+        player.installGame(arcade2);
+        player.installGame(shooter);
+
+        player.play(arcade, 3);
+        player.play(arcade2, 2);
+        player.play(shooter, 1);
+
+        int expected = 1;
+        int actual = player.sumGenre(shooter.getGenre());
+        assertEquals(expected, actual);
+    }
+
+//    @Test
+//    public void countInstallGame() {
+//        GameStore store = new GameStore();
+//        Game arcade = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+//        Game arcade2 = store.publishGame("Нетология Баттл Онлайн 2", "Аркады");
+//        Game shooter = store.publishGame("Нетология Баттл Онлайн", "Шутер");
+//
+//        Player player = new Player("Petya");
+//        player.play(arcade, 3);
+//        player.play(arcade2, 2);
+//        player.play(shooter, 1);
+//
+//        Game expected = shooter;
+//        Game actual = player.installGame(shooter);
+//        assertEquals(expected, actual);
+//    }
+
+    @Test
+    public void addPlayGameNegativeValue() {
+        GameStore store = new GameStore();
+        Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+
+        Player player = new Player("Petya");
+        player.installGame(game);
+
+
+        assertThrows(Exception.class, () -> {
+            player.play(game, -1);
         });
     }
 
-    @Test
-    public void shouldMostPlayerByGenreGamePlayed() {
-
-        GameStore store = new GameStore();
-        Game game1 = store.publishGame("Ёлки", "Аркада");
-        Game game2 = store.publishGame("Палки", "Аркада");
-        Game game3 = store.publishGame("Пышки", "Бродилка");
-
-        Player player = new Player("Petya");
-        player.installGame(game1);
-        player.installGame(game2);
-        player.installGame(game3);
-
-        player.play(game1, 50);
-        player.play(game2, 12);
-        player.play(game3, 1);
-
-
-        Game expected = game1;
-        Game actual = player.mostPlayerByGenre("Аркада");
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldMostPlayerByGenreIfGameNotPlayed() {
-        GameStore store = new GameStore();
-        Game game1 = store.publishGame("Танки", "Стрелялка");
-        Game game2 = store.publishGame("Симс", "Бродилка");
-        Game game3 = store.publishGame("Пышки", "Ещё");
-
-        Player player = new Player("Petya");
-        player.installGame(game1);
-        player.installGame(game2);
-        player.installGame(game3);
-
-        player.play(game2, 12);
-        player.play(game3, 8);
-
-
-        Game expected = null;
-        Game actual = player.mostPlayerByGenre("Стрелялка");
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSumGenreIfGameReplay() {
-
-        GameStore store = new GameStore();
-
-        Game game1 = store.publishGame("Танки", "Стрелялка");
-        Game game2 = store.publishGame("Симс", "Бродилка");
-        Game game3 = store.publishGame("Симс2", "Бродилка");
-
-        Player player = new Player("Petya");
-        player.installGame(game1);
-        player.installGame(game2);
-        player.installGame(game3);
-
-        player.play(game1, 5);
-        player.play(game1, 6);
-
-
-        int expected = 11;
-        int actual = player.sumGenre("Стрелялка");
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldSumGenreIfTwoGames() {
-        GameStore store = new GameStore();
-        Game game1 = store.publishGame("Танки", "Стрелялка");
-        Game game2 = store.publishGame("Симс", "Бродилка");
-        Game game3 = store.publishGame("Симс2", "Бродилка");
-
-        Player player = new Player("Petya");
-        player.installGame(game1);
-        player.installGame(game2);
-        player.installGame(game3);
-
-        player.play(game1, 5);
-        player.play(game2, 3);
-        player.play(game3, 20);
-
-        int expected = 23;
-        int actual = player.sumGenre("Бродилка");
-
-        assertEquals(expected, actual);
-    }
+//    @Test
+//    public void addPlayGameNegativeValue() {
+//        GameStore store =new GameStore();
+//        Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+//
+//        Player player = new Player("Petya");
+//        player.installGame(game);
+//
+//        assertThrows(Exception.class, () ->{
+//            player.play(game, -1);
+//        });
+//    }
 }
