@@ -32,27 +32,11 @@ public class GameStoreTest {
         String expected = store.getMostPlayer();
         String actual = "Irina";
         assertEquals(expected, actual);
-<<<<<<< HEAD
 
     }
 
     @Test
     public void shouldSumTimeIra() {
-=======
-    }
-
-    @Test //  выдать сообщение при создании игры, что данная игра уже есть в каталоге
-    public void shouldMessageIfGameAlreadyExists() {
-        Game game1 = store.publishGame("А", "Стратегия");
-
-        assertThrows(AlreadyExistsException.class, () -> {
-            store.publishGame("А", "Стратегия");
-        });
-    }
-
-    @Test // покажи каталог, к которому принадлежит добаленная игра
-    public void shouldShowCurrentStore() {
->>>>>>> a1740ba16704e688bada7cba5741d8e0a7a5408d
         GameStore store1 = new GameStore();
 
         Game game3 = store1.publishGame("NFS", "Races");
@@ -96,22 +80,9 @@ public class GameStoreTest {
         });
     }
 
-<<<<<<< HEAD
     @Test
     public void addNegativePlayTime() {
         GameStore store = new GameStore();
-=======
-    @Test  // добавить время игрока, если ранее играл в игры каталога
-    public void shouldAddTimePlayerIfPlayedSeveralGames() {
-        Game game1 = store.publishGame("А", "Стратегия");
-        Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
-        Player player1 = new Player("Петя");
-        player1.installGame(game1);
-        player1.installGame(game2);
-        player1.play(game1, 4);
-        player1.play(game2, 1);
-        store.addPlayTime(player1.getName(), 1);
->>>>>>> a1740ba16704e688bada7cba5741d8e0a7a5408d
 
         Game game1 = store.publishGame("NFS", "Races");
         Game game2 = store.publishGame("Far Cry", "Shooter");
@@ -128,18 +99,5 @@ public class GameStoreTest {
 
     }
 
-<<<<<<< HEAD
     // другие ваши тесты
-=======
-    @Test  // указать отрицательное число в параметре времени
-    public void shouldNotAddIfTimeNegative() {
-        Player player1 = new Player("Петя");
-        store.addPlayTime(player1.getName(), -1);
-
-        Integer expected = 0;
-        Integer actual = (store.getPlayedTime()).get(player1.getName());
-
-        assertEquals(expected, actual);
-    }
->>>>>>> a1740ba16704e688bada7cba5741d8e0a7a5408d
 }
