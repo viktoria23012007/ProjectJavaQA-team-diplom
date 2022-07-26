@@ -16,6 +16,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>5.7.0</version>
@@ -37,6 +43,7 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.5</version>
+
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
@@ -51,6 +58,7 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
+
                 </executions>
             </plugin>
         </plugins>
