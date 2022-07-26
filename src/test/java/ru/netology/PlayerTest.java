@@ -35,6 +35,7 @@ public class PlayerTest {
         player.installGame(arcade2);
         player.installGame(shooter);
 
+<<<<<<< HEAD:src/test/java/PlayerTest.java
         player.play(arcade, 4);
         player.play(arcade2, 3);
         player.play(shooter, 2);
@@ -129,6 +130,10 @@ public class PlayerTest {
 
         assertThrows(Exception.class, () -> {
             player.play(game, -1);
+=======
+        assertThrows(GameNotInstalled.class, () -> {
+            player.play(game3, 1);
+>>>>>>> 80a07ce5719599082e930266169544b78fb09469:src/test/java/ru/netology/PlayerTest.java
         });
     }
 
