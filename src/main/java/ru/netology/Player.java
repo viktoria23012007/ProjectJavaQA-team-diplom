@@ -45,6 +45,7 @@ public class Player {
         }
         return playedTime.get(game);
     }
+    
 
     /**
      * Метод принимает жанр игры (одно из полей объекта игры) и

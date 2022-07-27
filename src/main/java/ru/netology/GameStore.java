@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import ru.netology.AlreadyExistsException;
 
 
 
 public class GameStore {
     private List<Game> games = new ArrayList<>();
-
 
     /**
      * Информация о том, какой игрок сколько играл в игры этого каталога
@@ -20,10 +18,10 @@ public class GameStore {
      */
     private Map<String, Integer> playedTime = new HashMap<>();
 
+
     public Map<String, Integer> getPlayedTime() {
         return playedTime;
     }
-
 
     /**
      * Создание объекта игры с заданными заголовком и жанром
@@ -34,7 +32,6 @@ public class GameStore {
         games.add(game);
         return game;
     }
-
 
     /**
      * Проверяет наличие игры в каталоге и возврашает true
@@ -77,7 +74,6 @@ public class GameStore {
             if (playerTime > mostTime) {
                 mostTime = playerTime;
                 bestPlayer = playerName;
-
             }
         }
 //        if (mostTime == 0) {
@@ -92,6 +88,7 @@ public class GameStore {
 //                }
 //            }
 //        }
+
         return bestPlayer;
     }
 
