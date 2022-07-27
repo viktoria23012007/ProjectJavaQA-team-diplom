@@ -12,6 +12,10 @@ public class GameStore {
      */
     private Map<String, Integer> playedTime = new TreeMap<>();
 
+    public Map<String, Integer> getPlayedTime() {
+        return playedTime;
+    }
+
     /**
      * Создание объекта игры с заданными заголовком и жанром
      * Каждый объект игры помнит объект каталога, которому она принадлежит

@@ -27,7 +27,11 @@ public class Player {
      * если игра уже была, никаких изменений происходить не должно
      */
     public void installGame(Game game) {
+<<<<<<< HEAD
         playedTime.putIfAbsent(game, 0);
+=======
+        playedTime.put(game, 0);
+>>>>>>> b93cd451a7908005803f16881b8f8d375735bd4e
     }
 
     /**
@@ -39,13 +43,10 @@ public class Player {
      */
     public int play(Game game, int hours) {
         game.getStore().addPlayTime(name, hours);
-        int timeGenre = playedTime.getOrDefault(game, hours);
-        if (hours < 0) {
-            throw new RuntimeException("Quantity hours " + "can't be negative");
-        } else if (playedTime.containsKey(game)) {
-            playedTime.put(game, timeGenre + hours);
+        if (playedTime.containsKey(game)) {
+            playedTime.put(game, playedTime.get(game));
         } else {
-            throw new RuntimeException("Element with game: " + game.getTitle() + " not found");
+            playedTime.put(game, hours);
         }
         return playedTime.get(game);
     }
@@ -60,7 +61,7 @@ public class Player {
             if (game.getGenre().equals(genre)) {
                 sum += playedTime.get(game);
             } else {
-                sum = sum;
+                sum = 0;
             }
         }
         return sum;
@@ -70,16 +71,7 @@ public class Player {
      * Метод принимает жанр и возвращает игру этого жанра, в которую играли больше всего
      * Если в игры этого жанра не играли, возвращается null
      */
-    public String mostPlayerByGenre(String genre) {
-        int mostGenre = 0;
-        String bestGenre = null;
-        for (Game game : playedTime.keySet()) {
-            int genreTime = playedTime.get(game);
-            if (game.getGenre().equals(genre) && genreTime > mostGenre) {
-                mostGenre = genreTime;
-                bestGenre = game.getTitle();
-            }
-        }
-        return bestGenre;
+    public Game mostPlayerByGenre(String genre) {
+        return null;
     }
 }

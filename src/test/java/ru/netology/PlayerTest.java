@@ -22,6 +22,29 @@ public class PlayerTest {
         assertEquals(expected, actual);
     }
 
+<<<<<<< HEAD
+=======
+    /*@Test
+    public void checkMostPlayedGenre() {
+        GameStore store = new GameStore();
+        Game arcade = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+        Game arcade2 = store.publishGame("Нетология Баттл Онлайн 2", "Аркады");
+        Game shooter = store.publishGame("Нетология Баттл Онлайн", "Шутер");
+
+        Player player = new Player("Petya");
+        player.installGame(arcade);
+        player.installGame(arcade2);
+        player.installGame(shooter);
+
+        player.play(arcade, 4);
+        player.play(arcade2, 3);
+        player.play(shooter, 2);
+
+        String expected = "Нетология Баттл Онлайн";
+        String actual = player.mostPlayerByGenre("Аркады");
+        assertEquals(expected, actual);
+    }*/
+>>>>>>> b93cd451a7908005803f16881b8f8d375735bd4e
 
     @Test
     public void TestSumGenreTwoGames() { //#10
@@ -44,8 +67,14 @@ public class PlayerTest {
         assertEquals(expected, actual);
     }
 
+<<<<<<< HEAD
     @Test
     public void shouldThrowRunTimeException() { //#6
+=======
+
+    /*@Test
+    public void MostPlayedGenre() {
+>>>>>>> b93cd451a7908005803f16881b8f8d375735bd4e
         GameStore store = new GameStore();
         Game game = store.publishGame("PUBG", "BattleRoyale");
         Game game2 = store.publishGame("Fortnite", "BattleRoyale");
@@ -106,7 +135,7 @@ public class PlayerTest {
         String expected = null;
         String actual = player.mostPlayerByGenre("Аркады");
         assertEquals(expected, actual);
-    }
+    }*/
 
     @Test
     public void addPlayGameNegativeValue() { //#8
