@@ -1,16 +1,23 @@
 package ru.netology;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import ru.netology.AlreadyExistsException;
+
 
 public class GameStore {
     private List<Game> games = new ArrayList<>();
+
 
     /**
      * Информация о том, какой игрок сколько играл в игры этого каталога
      * Ключ - имя игрока
      * Значение - суммарное количество часов в игры этого каталога
      */
-    private Map<String, Integer> playedTime = new TreeMap<>();
+    private Map<String, Integer> playedTime = new HashMap<>();
 
     public Map<String, Integer> getPlayedTime() {
         return playedTime;
@@ -22,13 +29,10 @@ public class GameStore {
      */
     public Game publishGame(String title, String genre) {
         Game game = new Game(title, genre, this);
-        if (games.contains(game)) {
-            throw new RuntimeException();
-        }
-
         games.add(game);
         return game;
     }
+
 
     /**
      * Проверяет наличие игры в каталоге и возврашает true
@@ -50,7 +54,7 @@ public class GameStore {
      */
     public void addPlayTime(String playerName, int hours) {
         if (hours < 0) {
-            throw new RuntimeException();
+            return;
         }
         if (playedTime.containsKey(playerName)) {
             playedTime.put(playerName, playedTime.get(playerName) + hours);
@@ -71,8 +75,21 @@ public class GameStore {
             if (playerTime > mostTime) {
                 mostTime = playerTime;
                 bestPlayer = playerName;
+
             }
         }
+//        if (mostTime == 0) {
+//            return null;
+//        } else {
+//            for (String playerName : playedTime.keySet()) {
+//                if (playedTime.get(playerName) == mostTime) {
+//                    String[] tmp = new String[bestPlayers.length + 1];
+//                    System.arraycopy(bestPlayers, 0, tmp, 0, bestPlayers.length);
+//                    tmp[tmp.length - 1] = playerName;
+//                    bestPlayers = tmp;
+//                }
+//            }
+//        }
         return bestPlayer;
     }
 
@@ -81,10 +98,11 @@ public class GameStore {
      * за играми этого каталога
      */
     public int getSumPlayedTime() {
-        return playedTime
-                .values()
-                .stream()
-                .mapToInt(i -> i)
-                .sum();
+        int sum = 0;
+        ArrayList<Integer> playedHours = new ArrayList<>(playedTime.values());
+        for (Integer hours : playedHours) {
+            sum += hours;
+        }
+        return sum;
     }
 }

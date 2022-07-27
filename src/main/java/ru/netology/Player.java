@@ -2,7 +2,6 @@ package ru.netology;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class Player {
     private String name;
@@ -27,11 +26,7 @@ public class Player {
      * если игра уже была, никаких изменений происходить не должно
      */
     public void installGame(Game game) {
-<<<<<<< HEAD
-        playedTime.putIfAbsent(game, 0);
-=======
         playedTime.put(game, 0);
->>>>>>> b93cd451a7908005803f16881b8f8d375735bd4e
     }
 
     /**

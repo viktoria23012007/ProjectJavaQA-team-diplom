@@ -16,39 +16,39 @@ public class GameStoreTest {
 
     @Test // найти, если в списке одна игра
     public void shouldFindGameIfInStoreOneGame() {
-        Game game1 = store.publishGame("А", "Стратегия");
+        ru.netology.Game game1 = store.publishGame("А", "Стратегия");
 
         assertTrue(store.containsGame(game1));
     }
 
     @Test // найти первую добавленную, если в списке 2 игры
     public void shouldFindFirstGameIfInStoreTwoGames() {
-        Game game1 = store.publishGame("А", "Стратегия");
-        Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+        ru.netology.Game game1 = store.publishGame("А", "Стратегия");
+        ru.netology.Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
 
         assertTrue(store.containsGame(game1));
     }
 
     @Test // найти послденюю добавленную, если в списке 2 игры
     public void shouldFindLastGameIfInStoreTwoGames() {
-        Game game1 = store.publishGame("А", "Стратегия");
-        Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+        ru.netology.Game game1 = store.publishGame("А", "Стратегия");
+        ru.netology.Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
 
         assertTrue(store.containsGame(game2));
     }
 
     @Test // найти добавленную в середине списка
     public void shouldFindGameInTheMiddleStoreGames() {
-        Game game1 = store.publishGame("А", "Стратегия");
-        Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
-        Game game3 = store.publishGame("Б", "Квест");
+        ru.netology.Game game1 = store.publishGame("А", "Стратегия");
+        ru.netology.Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+        ru.netology.Game game3 = store.publishGame("Б", "Квест");
 
         assertTrue(store.containsGame(game2));
     }
 
     @Test // искать, если список пустой
     public void shouldNotFindIfInEmptyStore() {
-        Game game1 = new Game("А", "Стратегия", this.store);
+        ru.netology.Game game1 = new ru.netology.Game("А", "Стратегия", this.store);
 
         boolean expected = false;
         boolean actual = store.containsGame(game1);
@@ -59,7 +59,7 @@ public class GameStoreTest {
     @Test // покажи каталог, к которому принадлежит добаленная игра
     public void shouldShowCurrentStore() {
         GameStore store1 = new GameStore();
-        Game game1 = store1.publishGame("А", "Стратегия");
+        ru.netology.Game game1 = store1.publishGame("А", "Стратегия");
 
         GameStore expected = store1;
         GameStore actual = game1.getStore();
@@ -69,7 +69,7 @@ public class GameStoreTest {
 
     @Test  // найти лучшего если игроков не было
     public void shouldNotFindMostPlayerIfNoPlayers() {
-        Game game = store.publishGame("А", "Стратегия");
+        ru.netology.Game game = store.publishGame("А", "Стратегия");
 
         String expected = null;
         String actual = store.getMostPlayer();
@@ -79,8 +79,8 @@ public class GameStoreTest {
 
     @Test  // найти лучшего игрока, если был один игрок
     public void shouldFindMostPlayerIfOnePlayer() {
-        Game game = store.publishGame("А", "Стратегия");
-        Player player1 = new Player("Петя");
+        ru.netology.Game game = store.publishGame("А", "Стратегия");
+        ru.netology.Player player1 = new ru.netology.Player("Петя");
         player1.installGame(game);
         player1.play(game, 2);
 
@@ -92,11 +92,11 @@ public class GameStoreTest {
 
     @Test  // найти лучшего игрока, если несколько игроков играли в разные игры
     public void shouldFindMostPlayerIfPlayerPlayedDifferentGames() {
-        Game game1 = store.publishGame("А", "Стратегия");
-        Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
-        Player player1 = new Player("Петя");
-        Player player2 = new Player("Маша");
-        Player player3 = new Player("Коля");
+        ru.netology.Game game1 = store.publishGame("А", "Стратегия");
+        ru.netology.Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+        ru.netology.Player player1 = new ru.netology.Player("Петя");
+        ru.netology.Player player2 = new ru.netology.Player("Маша");
+        ru.netology.Player player3 = new ru.netology.Player("Коля");
         player1.installGame(game1);
         player2.installGame(game2);
         player3.installGame(game1);
@@ -112,9 +112,9 @@ public class GameStoreTest {
 
     @Test  // найти лучшего игрока, если один из игроков играл 0 часов
     public void shouldFindMostPlayerIfOnePlayedZeroHours() {
-        Game game1 = store.publishGame("А", "Стратегия");
-        Player player1 = new Player("Петя");
-        Player player2 = new Player("Маша");
+        ru.netology.Game game1 = store.publishGame("А", "Стратегия");
+        ru.netology.Player player1 = new ru.netology.Player("Петя");
+        ru.netology.Player player2 = new ru.netology.Player("Маша");
         player1.installGame(game1);
         player2.installGame(game1);
         player1.play(game1, 2);
@@ -128,9 +128,9 @@ public class GameStoreTest {
 
     @Test  // найти лучшего игрока, если лучшее время 1 час
     public void shouldFindMostPlayerBestTimeOneHour() {
-        Game game1 = store.publishGame("А", "Стратегия");
-        Player player1 = new Player("Петя");
-        Player player2 = new Player("Маша");
+        ru.netology.Game game1 = store.publishGame("А", "Стратегия");
+        ru.netology.Player player1 = new ru.netology.Player("Петя");
+        ru.netology.Player player2 = new ru.netology.Player("Маша");
         player1.installGame(game1);
         player2.installGame(game1);
         player1.play(game1, 1);
@@ -144,10 +144,10 @@ public class GameStoreTest {
 
     @Test  // найти последнего лучшего игрока, если 2 игрока играли одинаковое кол-во времени
     public void shouldFindMostPlayerIfTwoHaveSameTime() {
-        Game game1 = store.publishGame("А", "Стратегия");
-        Player player1 = new Player("Петя");
-        Player player2 = new Player("Маша");
-        Player player3 = new Player("Вася");
+        ru.netology.Game game1 = store.publishGame("А", "Стратегия");
+        ru.netology.Player player1 = new ru.netology.Player("Петя");
+        ru.netology.Player player2 = new ru.netology.Player("Маша");
+        ru.netology.Player player3 = new ru.netology.Player("Вася");
         player1.installGame(game1);
         player2.installGame(game1);
         player3.installGame(game1);
@@ -163,12 +163,12 @@ public class GameStoreTest {
 
     @Test  // найти лучшего, если один из игроков играл в несколько игр каталога
     public void shouldFindMostPlayerIfPlayedSeveralPlayers() {
-        Game game1 = store.publishGame("А", "Стратегия");
-        Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
-        Game game3 = store.publishGame("Б", "Квест");
-        Player player1 = new Player("Петя");
-        Player player2 = new Player("Маша");
-        Player player3 = new Player("Коля");
+        ru.netology.Game game1 = store.publishGame("А", "Стратегия");
+        ru.netology.Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+        ru.netology.Game game3 = store.publishGame("Б", "Квест");
+        ru.netology.Player player1 = new ru.netology.Player("Петя");
+        ru.netology.Player player2 = new ru.netology.Player("Маша");
+        ru.netology.Player player3 = new ru.netology.Player("Коля");
         player1.installGame(game1);
         player2.installGame(game1);
         player3.installGame(game1);
@@ -188,8 +188,8 @@ public class GameStoreTest {
 
     @Test  // если не было игроков
     public void shouldNotSetPlayedTimeIfPlayersDidNotPlay() {
-        Game game1 = store.publishGame("А", "Стратегия");
-        Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+        ru.netology.Game game1 = store.publishGame("А", "Стратегия");
+        ru.netology.Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
 
         int expected = 0;
         int actual = store.getSumPlayedTime();
@@ -199,8 +199,8 @@ public class GameStoreTest {
 
     @Test  // если 1 игра и 1 игрок
     public void shouldSetPlayedTimeIfOnePlayerOneGame() {
-        Game game1 = store.publishGame("А", "Стратегия");
-        Player player1 = new Player("Петя");
+        ru.netology.Game game1 = store.publishGame("А", "Стратегия");
+        ru.netology.Player player1 = new ru.netology.Player("Петя");
         player1.installGame(game1);
         player1.play(game1, 3);
 
@@ -212,10 +212,10 @@ public class GameStoreTest {
 
     @Test  // если 1 игра и несколько игроков
     public void shouldSetPlayedTimeIfSeveralPlayerOneGame() {
-        Game game1 = store.publishGame("А", "Стратегия");
-        Player player1 = new Player("Петя");
-        Player player2 = new Player("Маша");
-        Player player3 = new Player("Коля");
+        ru.netology.Game game1 = store.publishGame("А", "Стратегия");
+        ru.netology.Player player1 = new ru.netology.Player("Петя");
+        ru.netology.Player player2 = new ru.netology.Player("Маша");
+        ru.netology.Player player3 = new ru.netology.Player("Коля");
         player1.installGame(game1);
         player2.installGame(game1);
         player3.installGame(game1);
@@ -231,12 +231,12 @@ public class GameStoreTest {
 
     @Test  // если несколько игр и несколько игроков
     public void shouldSetPlayedTimeIfSeveralPlayerSeveralGames() {
-        Game game1 = store.publishGame("А", "Стратегия");
-        Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
-        Game game3 = store.publishGame("Б", "Квест");
-        Player player1 = new Player("Петя");
-        Player player2 = new Player("Маша");
-        Player player3 = new Player("Коля");
+        ru.netology.Game game1 = store.publishGame("А", "Стратегия");
+        ru.netology.Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+        ru.netology.Game game3 = store.publishGame("Б", "Квест");
+        ru.netology.Player player1 = new ru.netology.Player("Петя");
+        ru.netology.Player player2 = new ru.netology.Player("Маша");
+        ru.netology.Player player3 = new ru.netology.Player("Коля");
         player1.installGame(game3);
         player2.installGame(game2);
         player3.installGame(game1);
@@ -252,10 +252,10 @@ public class GameStoreTest {
 
     @Test  // если играют по несколько раз в одну и ту же игру
     public void shouldSetPlayedTimeIfPlayerPlayMultipleTimes() {
-        Game game1 = store.publishGame("А", "Стратегия");
-        Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
-        Player player1 = new Player("Петя");
-        Player player2 = new Player("Коля");
+        ru.netology.Game game1 = store.publishGame("А", "Стратегия");
+        ru.netology.Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+        ru.netology.Player player1 = new ru.netology.Player("Петя");
+        ru.netology.Player player2 = new ru.netology.Player("Коля");
         player1.installGame(game1);
         player2.installGame(game2);
         player1.play(game1, 10);
@@ -271,8 +271,8 @@ public class GameStoreTest {
 
     @Test  // найти время игрока, если добавляем 0
     public void shouldSetTimePlayerIfAddZero() {
-        Game game1 = store.publishGame("А", "Стратегия");
-        Player player1 = new Player("Петя");
+        ru.netology.Game game1 = store.publishGame("А", "Стратегия");
+        ru.netology.Player player1 = new ru.netology.Player("Петя");
         player1.installGame(game1);
         player1.play(game1, 4);
         store.addPlayTime(player1.getName(), 0);
@@ -285,7 +285,7 @@ public class GameStoreTest {
 
     @Test  // добавить время игрока, если ранее игрок не играл
     public void shouldAddTimePlayerIfWasNotPlayTime() {
-        Player player1 = new Player("Петя");
+        ru.netology.Player player1 = new ru.netology.Player("Петя");
         store.addPlayTime(player1.getName(), 5);
 
         Integer expected = 5;
@@ -296,9 +296,9 @@ public class GameStoreTest {
 
     @Test  // добавить время игрока, если ранее играл в игры каталога
     public void shouldAddTimePlayerIfPlayedSeveralGames() {
-        Game game1 = store.publishGame("А", "Стратегия");
-        Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
-        Player player1 = new Player("Петя");
+        ru.netology.Game game1 = store.publishGame("А", "Стратегия");
+        ru.netology.Game game2 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+        ru.netology.Player player1 = new ru.netology.Player("Петя");
         player1.installGame(game1);
         player1.installGame(game2);
         player1.play(game1, 4);
@@ -313,10 +313,10 @@ public class GameStoreTest {
 
     @Test  // указать отрицательное число в параметре времени
     public void shouldNotAddIfTimeNegative() {
-        Player player1 = new Player("Петя");
+        ru.netology.Player player1 = new ru.netology.Player("Петя");
         store.addPlayTime(player1.getName(), -1);
 
-        Integer expected = 0;
+        Integer expected = null;
         Integer actual = (store.getPlayedTime()).get(player1.getName());
 
         assertEquals(expected, actual);
