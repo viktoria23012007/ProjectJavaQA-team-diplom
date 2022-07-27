@@ -56,15 +56,6 @@ public class GameStoreTest {
         assertEquals(expected, actual);
     }
 
-    @Test //  выдать сообщение при создании игры, что данная игра уже есть в каталоге
-    public void shouldMessageIfGameAlreadyExists() {
-        Game game1 = store.publishGame("А", "Стратегия");
-
-        assertThrows(AlreadyExistsException.class, () -> {
-            store.publishGame("А", "Стратегия");
-        });
-    }
-
     @Test // покажи каталог, к которому принадлежит добаленная игра
     public void shouldShowCurrentStore() {
         GameStore store1 = new GameStore();
@@ -301,16 +292,6 @@ public class GameStoreTest {
         Integer actual = (store.getPlayedTime()).get(player1.getName());
 
         assertEquals(expected, actual);
-    }
-
-    @Test  // выдать сообщение, если добавляем отрицательное число
-    public void shouldMessageIfTimePlayerNegative() {
-        Player player1 = new Player("Петя");
-        store.addPlayTime(player1.getName(), -1);
-
-        assertThrows(TimeCannotBeNegativeException.class, () -> {
-            store.addPlayTime(player1.getName(), -1);
-        });
     }
 
     @Test  // добавить время игрока, если ранее играл в игры каталога
