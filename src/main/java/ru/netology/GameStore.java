@@ -8,6 +8,7 @@ import java.util.Map;
 import ru.netology.AlreadyExistsException;
 
 
+
 public class GameStore {
     private List<Game> games = new ArrayList<>();
 
@@ -22,6 +23,7 @@ public class GameStore {
     public Map<String, Integer> getPlayedTime() {
         return playedTime;
     }
+
 
     /**
      * Создание объекта игры с заданными заголовком и жанром
@@ -65,7 +67,7 @@ public class GameStore {
 
     /**
      * Ищет имя игрока, который играл в игры этого каталога больше всего
-     * времени. Если игроков нет, то возвращется null
+     * времени. Если игроков нет, то возвращет null
      */
     public String getMostPlayer() {
         int mostTime = 0;
