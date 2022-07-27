@@ -26,7 +26,9 @@ public class Player {
      * если игра уже была, никаких изменений происходить не должно
      */
     public void installGame(Game game) {
-        playedTime.put(game, 0);
+        if (!playedTime.containsKey(game)) {
+            playedTime.put(game, 0);
+        }
     }
 
     /**
@@ -37,11 +39,13 @@ public class Player {
      * если игра не была установлена, то надо выкидывать RuntimeException
      */
     public int play(Game game, int hours) {
-        game.getStore().addPlayTime(name, hours);
-        if (playedTime.containsKey(game)) {
-            playedTime.put(game, playedTime.get(game));
+        if (!playedTime.containsKey(game)) {
+            throw new GameNotInstalled(
+                    "Данная игра не установлена"
+            );
         } else {
-            playedTime.put(game, hours);
+            playedTime.put(game, (playedTime.get(game)+hours));
+            game.getStore().addPlayTime(name, hours);
         }
         return playedTime.get(game);
     }
@@ -55,8 +59,6 @@ public class Player {
         for (Game game : playedTime.keySet()) {
             if (game.getGenre().equals(genre)) {
                 sum += playedTime.get(game);
-            } else {
-                sum = 0;
             }
         }
         return sum;
@@ -67,6 +69,14 @@ public class Player {
      * Если в игры этого жанра не играли, возвращается null
      */
     public Game mostPlayerByGenre(String genre) {
-        return null;
+        Game mostGameByGenre = null;
+        int mostTimeByGenre = 0;
+        for (Game game : playedTime.keySet()) {
+            if ((game.getGenre().equals(genre)) && (playedTime.get(game) > mostTimeByGenre)) {
+                mostTimeByGenre = playedTime.get(game);
+                mostGameByGenre = game;
+            }
+        }
+        return mostGameByGenre;
     }
 }
