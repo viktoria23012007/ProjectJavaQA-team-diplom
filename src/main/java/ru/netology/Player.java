@@ -2,9 +2,9 @@ package ru.netology;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Player {
-    //    public String installGame;
     private String name;
 
     /**
@@ -25,12 +25,9 @@ public class Player {
     /**
      * добавление игры игроку
      * если игра уже была, никаких изменений происходить не должно
-     *
-     * @return
      */
-    public Game installGame(Game game) {
+    public void installGame(Game game) {
         playedTime.putIfAbsent(game, 0);
-        return game;
     }
 
     /**
